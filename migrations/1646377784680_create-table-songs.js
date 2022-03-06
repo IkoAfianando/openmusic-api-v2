@@ -13,7 +13,11 @@ exports.up = (pgm) => {
       type: "INT",
       notNull: true,
     },
-    performance: {
+    performer: {
+      type: "TEXT",
+      notNull: true,
+    },
+    genre: {
       type: "TEXT",
       notNull: true,
     },
@@ -29,10 +33,10 @@ exports.up = (pgm) => {
       type: "TEXT",
       notNull: true,
     },
-    album_id: {
-      type: "TEXT",
-      notNull: true,
-    },
+    // album_id: {
+    //     type: "TEXT",
+    //     notNull: true,
+    // },
   });
 };
 

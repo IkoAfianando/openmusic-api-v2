@@ -1,33 +1,30 @@
-const { Pool, Query } = require("pg");
+const { Pool } = require("pg");
 const { nanoid } = require("nanoid");
 const InvariantError = require("../../exceptions/InvariantError");
 const NotFoundError = require("../../exceptions/NotFoundError");
 const { mapDBToSong } = require("../../utils/index");
-const Module = require("module");
 
 class SongServices {
   constructor() {
     this._pool = new Pool();
   }
 
-  async addSong({ title, year, genre, performer, duration, albumId }) {
+  async addSong({ title, year, genre, performer, duration }) {
     const id = nanoid(16);
     const createdAt = new Date().toISOString();
     const updatedAt = createdAt;
 
     const query = {
-      text: "INSERT INTO songs VALUES($1, $2, $3, $4, $5, $6, $7, $8)",
-      text2: "SELECT id FROM albums VALUES($9)",
+      text: "INSERT INTO songs VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id",
       values: [
         id,
         title,
         year,
-        genre,
         performer,
+        genre,
         duration,
         createdAt,
         updatedAt,
-        albumId,
       ],
     };
 
@@ -48,20 +45,21 @@ class SongServices {
 
   async getSongById(id) {
     const query = {
-      text: "SELECT * FROM songs where id = $1",
+      text: "SELECT * FROM songs WHERE id = $1",
       values: [id],
     };
     const result = await this._pool.query(query);
     if (!result.rows.length) {
       throw new NotFoundError("Song tidak ditemukan");
     }
+    return result.rows.map(mapDBToSong)[0];
   }
 
-  async editSongById(id, { title, year, genre, performer, duration, albumId }) {
+  async editSongById(id, { title, year, genre, performer, duration }) {
     const updatedAt = new Date().toISOString();
     const query = {
-      text: "UPDATE songs SET title = $1, year = $2, genre = $3, performer = $4, duration = $5, albumId = $6 RETURNING id",
-      values: [title, year, genre, performer, duration, albumId, id],
+      text: "UPDATE songs SET title = $1, year = $2, performer = $3, genre = $4, duration = $5 WHERE id = $6 RETURNING id",
+      values: [title, year, performer, genre, duration, id],
     };
     const result = await this._pool.query(query);
     if (!result.rows.length) {

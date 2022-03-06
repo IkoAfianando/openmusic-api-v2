@@ -9,3 +9,5 @@ const SongsValidator = {
     }
   },
 };
+
+module.exports = SongsValidator;
