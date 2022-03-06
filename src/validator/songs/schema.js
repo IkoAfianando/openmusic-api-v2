@@ -1,4 +1,5 @@
-const joi = require("joi");
+/* eslint-disable linebreak-style */
+const joi = require('joi');
 
 const songsPayloadSchema = joi.object({
   title: joi.string().required(),

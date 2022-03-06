@@ -1,3 +1,7 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable camelcase */
+/* eslint-disable linebreak-style */
+/* eslint-disable object-curly-newline */
 const mapDBToAlbum = ({ id, name, year, created_at, updated_at }) => ({
   id,
   name,

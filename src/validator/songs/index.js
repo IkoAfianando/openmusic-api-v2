@@ -1,5 +1,6 @@
-const { songsPayloadSchema } = require("./schema");
-const InvariantError = require("../../exceptions/InvariantError");
+/* eslint-disable linebreak-style */
+const { songsPayloadSchema } = require('./schema');
+const InvariantError = require('../../exceptions/InvariantError');
 
 const SongsValidator = {
   validateSongPayload: (payload) => {

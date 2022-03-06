@@ -1,5 +1,6 @@
-const { albumsPayloadSchema } = require("./schema");
-const InvariantError = require("../../exceptions/InvariantError");
+/* eslint-disable linebreak-style */
+const { albumsPayloadSchema } = require('./schema');
+const InvariantError = require('../../exceptions/InvariantError');
 
 const AlbumsValidator = {
   validateAlbumPayload: (payload) => {

@@ -1,29 +1,32 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-unused-vars */
+/* eslint-disable linebreak-style */
 const {
   postAlbumHandler,
   getAlbumHandler,
   putAlbumHandler,
   deleteAlbumHandler,
-} = require("./handler");
+} = require('./handler');
 
 const routes = (handler) => [
   {
-    method: "POST",
-    path: "/albums",
+    method: 'POST',
+    path: '/albums',
     handler: handler.postAlbumHandler,
   },
   {
-    method: "GET",
-    path: "/albums/{id}",
+    method: 'GET',
+    path: '/albums/{id}',
     handler: handler.getAlbumHandler,
   },
   {
-    method: "PUT",
-    path: "/albums/{id}",
+    method: 'PUT',
+    path: '/albums/{id}',
     handler: handler.putAlbumHandler,
   },
   {
-    method: "DELETE",
-    path: "/albums/{id}",
+    method: 'DELETE',
+    path: '/albums/{id}',
     handler: handler.deleteAlbumHandler,
   },
 ];
